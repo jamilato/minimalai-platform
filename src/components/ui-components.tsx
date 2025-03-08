@@ -12,7 +12,7 @@ export const Badge = ({
   className?: string;
 }) => (
   <span className={cn(
-    "inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-secondary text-secondary-foreground",
+    "inline-flex items-center px-2.5 py-0.5 text-xs font-medium text-[#333333] bg-[#F5F5F5]",
     className
   )}>
     {children}
@@ -31,7 +31,7 @@ export const Section = ({
 }) => (
   <section
     id={id}
-    className={cn("py-16 md:py-24", className)}
+    className={cn("py-20 md:py-28", className)}
   >
     <div className="container-custom">{children}</div>
   </section>
@@ -51,7 +51,7 @@ export const AnimatedSection = ({
 }) => (
   <motion.section
     id={id}
-    className={cn("py-16 md:py-24", className)}
+    className={cn("py-20 md:py-28", className)}
     initial={{ opacity: 0, y: 20 }}
     whileInView={{ opacity: 1, y: 0 }}
     viewport={{ once: true, margin: "-100px" }}
@@ -72,8 +72,8 @@ export const Card = ({
   hoverable?: boolean;
 }) => (
   <div className={cn(
-    "rounded-lg border bg-card p-6 text-card-foreground shadow-sm",
-    hoverable && "transition-all duration-300 hover:shadow-md hover:translate-y-[-4px]",
+    "minimal-card",
+    hoverable && "transition-all duration-300 hover:shadow-lg hover:translate-y-[-4px]",
     className
   )}>
     {children}
@@ -93,11 +93,11 @@ export const Feature = ({
   className?: string;
 }) => (
   <div className={cn("flex flex-col items-start", className)}>
-    <div className="mb-4 rounded-full bg-primary/5 p-3 text-primary">
+    <div className="mb-6 text-primary">
       <Icon className="h-6 w-6" />
     </div>
-    <h3 className="mb-2 text-xl font-semibold">{title}</h3>
-    <p className="text-muted-foreground">{description}</p>
+    <h3 className="mb-3 text-xl font-medium tracking-tight">{title}</h3>
+    <p className="text-muted-foreground leading-relaxed">{description}</p>
   </div>
 );
 
@@ -138,29 +138,30 @@ export const PriceCard = ({
   buttonAction?: () => void;
 }) => (
   <Card className={cn(
-    "flex flex-col justify-between",
-    isPopular ? "border-primary shadow-lg" : "border-border",
+    "flex flex-col justify-between h-full",
+    isPopular ? "border-black shadow-lg" : "border-[#EEEEEE]",
     className
   )}>
     {isPopular && (
-      <div className="absolute top-0 right-0 -translate-y-1/2 translate-x-1/4">
-        <Badge className="bg-primary text-primary-foreground px-4 py-1">Popular</Badge>
+      <div className="absolute top-0 right-0 -translate-y-1/2 translate-x-0">
+        <Badge className="bg-black text-white px-4 py-1">Populaire</Badge>
       </div>
     )}
     <div>
-      <h3 className="text-xl font-semibold tracking-tight">{title}</h3>
-      <div className="mt-4 flex items-baseline">
-        <span className="text-3xl font-bold tracking-tight">{price}</span>
-        {price !== "Custom" && <span className="ml-1 text-muted-foreground">/month</span>}
+      <h3 className="text-xl font-medium tracking-tight">{title}</h3>
+      <div className="mt-6 flex items-baseline">
+        <span className="text-4xl font-bold tracking-tight">{price}</span>
+        {price !== "Sur mesure" && <span className="ml-1 text-muted-foreground">/mois</span>}
       </div>
-      <p className="mt-4 text-sm text-muted-foreground">{description}</p>
-      <ul className="mt-6 space-y-3">
+      <p className="mt-4 text-muted-foreground">{description}</p>
+      <div className="luxury-divider my-8 h-px w-full bg-[#F5F5F5]"></div>
+      <ul className="mt-6 space-y-4">
         {features.map((feature, i) => (
-          <li key={i} className="flex items-center">
-            <svg className="h-4 w-4 text-primary flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+          <li key={i} className="flex items-start">
+            <svg className="h-5 w-5 text-foreground flex-shrink-0 mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M5 13l4 4L19 7" />
             </svg>
-            <span className="ml-3 text-sm text-muted-foreground">{feature}</span>
+            <span className="text-muted-foreground">{feature}</span>
           </li>
         ))}
       </ul>
@@ -168,10 +169,10 @@ export const PriceCard = ({
     <button 
       onClick={buttonAction}
       className={cn(
-        "mt-8 w-full rounded-md px-4 py-2 text-sm font-medium transition-colors",
+        "mt-10 w-full rounded-none py-3 px-4 text-sm font-medium transition-colors",
         isPopular
           ? "bg-primary text-primary-foreground hover:bg-primary/90"
-          : "bg-secondary text-secondary-foreground hover:bg-secondary/80"
+          : "bg-white border border-black text-foreground hover:bg-black hover:text-white"
       )}
     >
       {buttonText}

@@ -14,8 +14,8 @@
     --popover: 0 0% 100%;
     --popover-foreground: 0 0% 10%;
 
-    --primary: 0 0% 9%;
-    --primary-foreground: 0 0% 98%;
+    --primary: 0 0% 0%;
+    --primary-foreground: 0 0% 100%;
 
     --secondary: 0 0% 96%;
     --secondary-foreground: 0 0% 9%;
@@ -29,15 +29,16 @@
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 0 0% 98%;
 
-    --border: 0 0% 89.8%;
-    --input: 0 0% 89.8%;
+    --border: 0 0% 92%;
+    --input: 0 0% 92%;
     --ring: 0 0% 3.9%;
 
-    --radius: 0.5rem;
+    --radius: 0.25rem;
   }
 
   * {
     @apply border-border;
+    letter-spacing: -0.01em;
   }
 
   body {
@@ -48,7 +49,7 @@
 
 @layer utilities {
   .glass-panel {
-    @apply backdrop-blur-lg bg-white/80 border border-white/20 shadow-lg;
+    @apply backdrop-blur-lg bg-white/95 border border-white/20 shadow-sm;
   }
   
   .text-balance {
@@ -66,15 +67,27 @@
   .backface-hidden {
     backface-visibility: hidden;
   }
+  
+  .tesla-gradient {
+    @apply bg-gradient-to-b from-[#F5F5F5] to-white;
+  }
+  
+  .premium-border {
+    @apply border border-[#EEEEEE];
+  }
+  
+  .premium-shadow {
+    @apply shadow-[0_4px_28px_rgba(0,0,0,0.03)];
+  }
 }
 
 @layer components {
   .hero-button {
-    @apply px-6 py-3 rounded-full transition-all duration-300 ease-in-out transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary;
+    @apply px-6 py-3 rounded-none border border-transparent transition-all duration-300 ease-in-out transform hover:scale-105 focus:outline-none focus:ring-0 font-medium;
   }
   
   .section-heading {
-    @apply text-3xl md:text-4xl font-bold mb-8 text-foreground tracking-tight;
+    @apply text-3xl md:text-4xl lg:text-5xl font-bold mb-8 text-foreground tracking-tight;
   }
   
   .section-subheading {
@@ -87,5 +100,21 @@
   
   .link-underline {
     @apply relative after:absolute after:bottom-0 after:left-0 after:h-[1px] after:w-0 after:bg-current after:transition-all after:duration-300 hover:after:w-full;
+  }
+  
+  .minimal-card {
+    @apply bg-white border border-[#EEEEEE] shadow-[0_4px_28px_rgba(0,0,0,0.03)] rounded-none p-6;
+  }
+  
+  .minimal-input {
+    @apply border-[#EEEEEE] rounded-none focus:ring-0 focus:border-black transition-colors;
+  }
+  
+  .premium-grid {
+    @apply grid gap-8 md:gap-10;
+  }
+  
+  .luxury-divider {
+    @apply w-full h-px bg-[#EEEEEE] my-16;
   }
 }
