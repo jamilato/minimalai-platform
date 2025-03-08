@@ -9,6 +9,7 @@ import {
 import { cn } from '@/lib/utils';
 import { Section, AnimatedSection, Feature, HeroHeading, Badge, Card } from '@/components/ui-components';
 import InteractiveDemo from '@/components/InteractiveDemo';
+import AgentShowcase from '@/components/AgentShowcase';
 
 const Index = () => {
   // Parallax effect ref for hero section
@@ -194,6 +195,11 @@ const Index = () => {
           </motion.div>
         </div>
       </div>
+      
+      {/* Featured Agents Showcase */}
+      <AnimatedSection className="bg-white" id="featured-agents">
+        <AgentShowcase />
+      </AnimatedSection>
       
       {/* Specialized AI Agents Section */}
       <AnimatedSection className="bg-white" id="specialized-agents">
