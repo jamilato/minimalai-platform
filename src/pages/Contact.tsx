@@ -1,237 +1,142 @@
 
-import { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { Check, Mail, MapPin, Phone } from 'lucide-react';
-import { useToast } from "@/hooks/use-toast";
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Textarea } from '@/components/ui/textarea';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { Section, AnimatedSection, Badge, Card } from '@/components/ui-components';
+import { Mail, MapPin, Phone } from 'lucide-react';
+import { Section, Badge } from '@/components/ui-components';
+import ContactForm from '@/components/ContactForm';
 
 const Contact = () => {
-  const { toast } = useToast();
-  const [formState, setFormState] = useState({
-    name: '',
-    email: '',
-    subject: '',
-    message: '',
-    company: '',
-    budget: '',
-  });
-  const [isSubmitting, setIsSubmitting] = useState(false);
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    const { name, value } = e.target;
-    setFormState(prev => ({ ...prev, [name]: value }));
-  };
-
-  const handleSelectChange = (name: string, value: string) => {
-    setFormState(prev => ({ ...prev, [name]: value }));
-  };
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setIsSubmitting(true);
-    
-    // Simulate API call
-    await new Promise(resolve => setTimeout(resolve, 1500));
-    
-    toast({
-      title: "Message envoyé",
-      description: "Nous vous répondrons dans les plus brefs délais.",
-    });
-    
-    // Reset form
-    setFormState({
-      name: '',
-      email: '',
-      subject: '',
-      message: '',
-      company: '',
-      budget: '',
-    });
-    setIsSubmitting(false);
-  };
+  const contactInfo = [
+    {
+      icon: <Mail className="h-6 w-6" />,
+      title: "Email",
+      details: "contact@minimalai.com",
+      link: "mailto:contact@minimalai.com"
+    },
+    {
+      icon: <Phone className="h-6 w-6" />,
+      title: "Téléphone",
+      details: "+33 1 23 45 67 89",
+      link: "tel:+33123456789"
+    },
+    {
+      icon: <MapPin className="h-6 w-6" />,
+      title: "Adresse",
+      details: "75 Avenue des Champs-Élysées, 75008 Paris, France",
+      link: "https://maps.google.com"
+    }
+  ];
 
   return (
-    <div className="pt-24 min-h-screen">
+    <div className="pt-24 pb-16 min-h-screen">
       <Section className="bg-white">
-        <div className="text-center">
-          <Badge className="mb-4">Contactez-nous</Badge>
-          <h1 className="text-4xl md:text-5xl font-bold mb-6">
-            Discutons de votre projet
-          </h1>
-          <p className="text-lg text-muted-foreground max-w-2xl mx-auto mb-8">
-            Vous avez des questions ou souhaitez en savoir plus sur nos services? 
-            Nous sommes là pour vous aider à démarrer avec nos assistants IA.
+        <div className="text-center mb-12">
+          <Badge className="mb-4">Contact</Badge>
+          <h1 className="text-4xl md:text-5xl font-bold mb-6">Parlons de vos besoins</h1>
+          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+            Vous avez des questions sur nos assistants IA ou vous souhaitez discuter d'un projet ?
+            Notre équipe est à votre disposition pour vous accompagner.
           </p>
+        </div>
+        
+        <div className="grid md:grid-cols-2 gap-12 items-start">
+          <div>
+            <div className="bg-secondary p-8 rounded-none">
+              <h2 className="text-xl font-semibold mb-6">Informations de contact</h2>
+              
+              <div className="space-y-6">
+                {contactInfo.map((item, index) => (
+                  <motion.div
+                    key={index}
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: index * 0.1 }}
+                  >
+                    <a 
+                      href={item.link} 
+                      className="flex items-start group"
+                      target={item.title === "Adresse" ? "_blank" : undefined}
+                      rel={item.title === "Adresse" ? "noopener noreferrer" : undefined}
+                    >
+                      <div className="mr-4 p-3 bg-white rounded-none">
+                        {item.icon}
+                      </div>
+                      <div>
+                        <h3 className="font-medium mb-1">{item.title}</h3>
+                        <p className="text-muted-foreground group-hover:text-primary transition-colors">
+                          {item.details}
+                        </p>
+                      </div>
+                    </a>
+                  </motion.div>
+                ))}
+              </div>
+              
+              <div className="mt-10">
+                <h3 className="text-lg font-medium mb-4">Suivez-nous</h3>
+                <div className="flex space-x-4">
+                  <a href="#" className="p-2 bg-white rounded-none hover:bg-primary hover:text-white transition-colors">
+                    <svg className="h-5 w-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                      <path d="M8.29 20.251c7.547 0 11.675-6.253 11.675-11.675 0-.178 0-.355-.012-.53A8.348 8.348 0 0022 5.92a8.19 8.19 0 01-2.357.646 4.118 4.118 0 001.804-2.27 8.224 8.224 0 01-2.605.996 4.107 4.107 0 00-6.993 3.743 11.65 11.65 0 01-8.457-4.287 4.106 4.106 0 001.27 5.477A4.072 4.072 0 012.8 9.713v.052a4.105 4.105 0 003.292 4.022 4.095 4.095 0 01-1.853.07 4.108 4.108 0 003.834 2.85A8.233 8.233 0 012 18.407a11.616 11.616 0 006.29 1.84" />
+                    </svg>
+                  </a>
+                  <a href="#" className="p-2 bg-white rounded-none hover:bg-primary hover:text-white transition-colors">
+                    <svg className="h-5 w-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                      <path fillRule="evenodd" d="M12.315 2c2.43 0 2.784.013 3.808.06 1.064.049 1.791.218 2.427.465a4.902 4.902 0 011.772 1.153 4.902 4.902 0 011.153 1.772c.247.636.416 1.363.465 2.427.048 1.067.06 1.407.06 4.123v.08c0 2.643-.012 2.987-.06 4.043-.049 1.064-.218 1.791-.465 2.427a4.902 4.902 0 01-1.153 1.772 4.902 4.902 0 01-1.772 1.153c-.636.247-1.363.416-2.427.465-1.067.048-1.407.06-4.123.06h-.08c-2.643 0-2.987-.012-4.043-.06-1.064-.049-1.791-.218-2.427-.465a4.902 4.902 0 01-1.772-1.153 4.902 4.902 0 01-1.153-1.772c-.247-.636-.416-1.363-.465-2.427-.047-1.024-.06-1.379-.06-3.808v-.63c0-2.43.013-2.784.06-3.808.049-1.064.218-1.791.465-2.427a4.902 4.902 0 011.153-1.772A4.902 4.902 0 015.45 2.525c.636-.247 1.363-.416 2.427-.465C8.901 2.013 9.256 2 11.685 2h.63zm-.081 1.802h-.468c-2.456 0-2.784.011-3.807.058-.975.045-1.504.207-1.857.344-.467.182-.8.398-1.15.748-.35.35-.566.683-.748 1.15-.137.353-.3.882-.344 1.857-.047 1.023-.058 1.351-.058 3.807v.468c0 2.456.011 2.784.058 3.807.045.975.207 1.504.344 1.857.182.466.399.8.748 1.15.35.35.683.566 1.15.748.353.137.882.3 1.857.344 1.054.048 1.37.058 4.041.058h.08c2.597 0 2.917-.01 3.96-.058.976-.045 1.505-.207 1.858-.344.466-.182.8-.398 1.15-.748.35-.35.566-.683.748-1.15.137-.353.3-.882.344-1.857.048-1.055.058-1.37.058-4.041v-.08c0-2.597-.01-2.917-.058-3.96-.045-.976-.207-1.505-.344-1.858a3.097 3.097 0 00-.748-1.15 3.098 3.098 0 00-1.15-.748c-.353-.137-.882-.3-1.857-.344-1.023-.047-1.351-.058-3.807-.058zM12 6.865a5.135 5.135 0 110 10.27 5.135 5.135 0 010-10.27zm0 1.802a3.333 3.333 0 100 6.666 3.333 3.333 0 000-6.666zm5.338-3.205a1.2 1.2 0 110 2.4 1.2 1.2 0 010-2.4z" clipRule="evenodd" />
+                    </svg>
+                  </a>
+                  <a href="#" className="p-2 bg-white rounded-none hover:bg-primary hover:text-white transition-colors">
+                    <svg className="h-5 w-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                      <path fillRule="evenodd" d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" clipRule="evenodd" />
+                    </svg>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <div>
+            <h2 className="text-xl font-semibold mb-6">Envoyez-nous un message</h2>
+            <ContactForm />
+          </div>
         </div>
       </Section>
       
-      <AnimatedSection className="bg-secondary/30">
-        <div className="grid md:grid-cols-3 gap-12">
-          <div className="md:col-span-2">
-            <Card className="p-8">
-              <h2 className="text-2xl font-bold mb-6">Envoyez-nous un message</h2>
-              <form onSubmit={handleSubmit} className="space-y-6">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  <div className="space-y-2">
-                    <label htmlFor="name" className="text-sm font-medium">
-                      Nom complet <span className="text-destructive">*</span>
-                    </label>
-                    <Input
-                      id="name"
-                      name="name"
-                      placeholder="Votre nom"
-                      value={formState.name}
-                      onChange={handleChange}
-                      required
-                    />
-                  </div>
-                  <div className="space-y-2">
-                    <label htmlFor="email" className="text-sm font-medium">
-                      Email <span className="text-destructive">*</span>
-                    </label>
-                    <Input
-                      id="email"
-                      name="email"
-                      type="email"
-                      placeholder="votre@email.com"
-                      value={formState.email}
-                      onChange={handleChange}
-                      required
-                    />
-                  </div>
-                  <div className="space-y-2">
-                    <label htmlFor="company" className="text-sm font-medium">
-                      Entreprise
-                    </label>
-                    <Input
-                      id="company"
-                      name="company"
-                      placeholder="Nom de votre entreprise"
-                      value={formState.company}
-                      onChange={handleChange}
-                    />
-                  </div>
-                  <div className="space-y-2">
-                    <label htmlFor="budget" className="text-sm font-medium">
-                      Budget estimé
-                    </label>
-                    <Select
-                      value={formState.budget}
-                      onValueChange={(value) => handleSelectChange('budget', value)}
-                    >
-                      <SelectTrigger id="budget">
-                        <SelectValue placeholder="Sélectionnez un budget" />
-                      </SelectTrigger>
-                      <SelectContent>
-                        <SelectItem value="moins-de-1000">Moins de 1000€</SelectItem>
-                        <SelectItem value="1000-5000">1000€ - 5000€</SelectItem>
-                        <SelectItem value="5000-10000">5000€ - 10000€</SelectItem>
-                        <SelectItem value="plus-de-10000">Plus de 10000€</SelectItem>
-                      </SelectContent>
-                    </Select>
-                  </div>
-                </div>
-                
-                <div className="space-y-2">
-                  <label htmlFor="subject" className="text-sm font-medium">
-                    Sujet <span className="text-destructive">*</span>
-                  </label>
-                  <Input
-                    id="subject"
-                    name="subject"
-                    placeholder="Sujet de votre message"
-                    value={formState.subject}
-                    onChange={handleChange}
-                    required
-                  />
-                </div>
-                
-                <div className="space-y-2">
-                  <label htmlFor="message" className="text-sm font-medium">
-                    Message <span className="text-destructive">*</span>
-                  </label>
-                  <Textarea
-                    id="message"
-                    name="message"
-                    placeholder="Détaillez votre projet ou votre demande..."
-                    value={formState.message}
-                    onChange={handleChange}
-                    required
-                    className="min-h-[150px]"
-                  />
-                </div>
-                
-                <Button 
-                  type="submit" 
-                  className="w-full md:w-auto px-8"
-                  disabled={isSubmitting}
-                >
-                  {isSubmitting ? 'Envoi en cours...' : 'Envoyer le message'}
-                </Button>
-              </form>
-            </Card>
+      <Section className="bg-white">
+        <div className="text-center">
+          <h2 className="text-2xl font-bold mb-8">Questions fréquentes</h2>
+          
+          <div className="max-w-3xl mx-auto grid gap-8 mb-12">
+            <div className="text-left">
+              <h3 className="text-lg font-medium mb-2">Comment puis-je essayer vos assistants IA gratuitement ?</h3>
+              <p className="text-muted-foreground">
+                Vous pouvez créer un compte gratuitement et bénéficier d'un essai de 14 jours avec toutes les fonctionnalités.
+                Aucune carte de crédit n'est requise pour l'essai.
+              </p>
+            </div>
+            
+            <div className="text-left">
+              <h3 className="text-lg font-medium mb-2">Quels types d'assistants proposez-vous ?</h3>
+              <p className="text-muted-foreground">
+                Nous proposons une gamme d'assistants spécialisés : conversation, rédaction, analyse de données, 
+                et bien d'autres. Découvrez-les tous sur notre page <Link to="/assistants" className="underline">Assistants</Link>.
+              </p>
+            </div>
+            
+            <div className="text-left">
+              <h3 className="text-lg font-medium mb-2">Comment garantissez-vous la confidentialité des données ?</h3>
+              <p className="text-muted-foreground">
+                Toutes les données sont chiffrées et nous n'utilisons jamais vos informations pour entraîner nos modèles.
+                Consultez notre <Link to="/privacy" className="underline">politique de confidentialité</Link> pour en savoir plus.
+              </p>
+            </div>
           </div>
           
-          <div className="space-y-6">
-            <Card className="p-6">
-              <div className="flex items-start space-x-4">
-                <Mail className="h-5 w-5 text-primary mt-1" />
-                <div>
-                  <h3 className="font-medium">Email</h3>
-                  <p className="text-muted-foreground mt-1">contact@minimalai.com</p>
-                  <p className="text-muted-foreground">support@minimalai.com</p>
-                </div>
-              </div>
-            </Card>
-            
-            <Card className="p-6">
-              <div className="flex items-start space-x-4">
-                <Phone className="h-5 w-5 text-primary mt-1" />
-                <div>
-                  <h3 className="font-medium">Téléphone</h3>
-                  <p className="text-muted-foreground mt-1">+33 1 23 45 67 89</p>
-                  <p className="text-muted-foreground">Du lundi au vendredi, 9h-18h</p>
-                </div>
-              </div>
-            </Card>
-            
-            <Card className="p-6">
-              <div className="flex items-start space-x-4">
-                <MapPin className="h-5 w-5 text-primary mt-1" />
-                <div>
-                  <h3 className="font-medium">Adresse</h3>
-                  <p className="text-muted-foreground mt-1">
-                    15 Avenue des Champs-Élysées<br />
-                    75008 Paris, France
-                  </p>
-                </div>
-              </div>
-            </Card>
-            
-            <Card className="p-6 bg-primary text-primary-foreground">
-              <h3 className="font-medium mb-4">Pourquoi nous choisir?</h3>
-              <ul className="space-y-3">
-                <li className="flex items-start space-x-2">
-                  <Check className="h-4 w-4 mt-1" />
-                  <span className="text-sm">Expertise dans l'IA conversationnelle</span>
-                </li>
-                <li className="flex items-start space-x-2">
-                  <Check className="h-4 w-4 mt-1" />
-                  <span className="text-sm">Solutions sur mesure adaptées à vos besoins</span>
-                </li>
-                <li className="flex items-start space-x-2">
-                  <Check className="h-4 w-4 mt-1" />
-                  <span className="text-sm">Support dédié et formation complète</span>
-                </li>
-              </ul>
-            </Card>
-          </div>
+          <Link to="/pricing" className="hero-button bg-primary text-primary-foreground">
+            Découvrir nos offres
+          </Link>
         </div>
-      </AnimatedSection>
+      </Section>
     </div>
   );
 };

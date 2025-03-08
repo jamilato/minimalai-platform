@@ -5,6 +5,7 @@ import { motion, useScroll, useTransform } from 'framer-motion';
 import { Bot, Zap, Shield, ArrowRight, MessageCircle, Star, Check } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { Section, AnimatedSection, Feature, HeroHeading, Badge, Card } from '@/components/ui-components';
+import InteractiveDemo from '@/components/InteractiveDemo';
 
 const Index = () => {
   // Parallax effect ref for hero section
@@ -25,18 +26,21 @@ const Index = () => {
       author: "Sophie Martin",
       role: "Directrice Marketing, TechCorp",
       rating: 5,
+      image: "/placeholder.svg"
     },
     {
       quote: "La simplicité et l'efficacité de cette plateforme sont impressionnantes. Nos équipes ont gagné des heures chaque semaine.",
       author: "Thomas Dubois",
       role: "CTO, StartupNext",
       rating: 5,
+      image: "/placeholder.svg"
     },
     {
       quote: "Enfin une solution d'IA qui ne nécessite pas une semaine de formation pour être utilisée. Élégante et puissante.",
       author: "Claire Lefort",
       role: "Consultante Indépendante",
       rating: 5,
+      image: "/placeholder.svg"
     },
   ];
   
@@ -74,7 +78,7 @@ const Index = () => {
           className="absolute inset-0 z-0"
         >
           <div className="absolute inset-0 bg-gradient-to-b from-secondary to-transparent opacity-50" />
-          <div className="absolute inset-0 bg-grid-black/[0.02]" />
+          <div className="absolute inset-0 bg-grid-black" />
         </motion.div>
         
         <div className="container-custom relative z-10 mt-16 text-center">
@@ -117,43 +121,7 @@ const Index = () => {
             transition={{ duration: 0.5, delay: 0.3 }}
             className="mt-16 max-w-4xl mx-auto relative"
           >
-            <div className="relative glass-panel rounded-xl overflow-hidden shadow-2xl">
-              <div className="absolute inset-0 bg-grid-black/[0.02]" />
-              <div className="px-6 py-8 relative z-10">
-                <div className="flex items-center mb-4">
-                  <div className="h-2 w-2 rounded-full bg-red-500 mr-2" />
-                  <div className="h-2 w-2 rounded-full bg-yellow-500 mr-2" />
-                  <div className="h-2 w-2 rounded-full bg-green-500" />
-                </div>
-                <div className="flex gap-4">
-                  <div className="w-64 bg-secondary rounded-lg p-4 flex-shrink-0">
-                    <div className="h-8 w-full bg-muted rounded mb-4" />
-                    <div className="space-y-2">
-                      <div className="h-4 w-full bg-muted rounded" />
-                      <div className="h-4 w-3/4 bg-muted rounded" />
-                      <div className="h-4 w-5/6 bg-muted rounded" />
-                    </div>
-                  </div>
-                  <div className="flex-1 bg-white rounded-lg p-4">
-                    <div className="flex justify-between mb-4">
-                      <div className="h-6 w-40 bg-muted rounded" />
-                      <div className="h-6 w-20 bg-primary rounded" />
-                    </div>
-                    <div className="space-y-3">
-                      <div className="h-4 w-full bg-muted rounded" />
-                      <div className="h-4 w-full bg-muted rounded" />
-                      <div className="h-4 w-2/3 bg-muted rounded" />
-                    </div>
-                    <div className="mt-6 border-t pt-4">
-                      <div className="flex gap-2">
-                        <div className="h-8 flex-1 bg-muted rounded" />
-                        <div className="h-8 w-24 bg-primary rounded" />
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
+            <InteractiveDemo />
             
             <div className="absolute -bottom-6 -right-6 w-24 h-24 bg-secondary rounded-full animate-float z-0 opacity-80" />
             <div className="absolute -top-10 -left-10 w-20 h-20 bg-muted rounded-full animate-float z-0 opacity-50" style={{ animationDelay: "1s" }} />
@@ -265,21 +233,31 @@ const Index = () => {
         
         <div className="grid md:grid-cols-3 gap-8">
           {testimonials.map((testimonial, index) => (
-            <Card 
-              key={index} 
-              className="bg-secondary/50"
+            <motion.div
+              key={index}
+              whileHover={{ y: -5 }}
+              transition={{ duration: 0.3 }}
             >
-              <div className="flex mb-4">
-                {[...Array(testimonial.rating)].map((_, i) => (
-                  <Star key={i} className="h-5 w-5 text-primary fill-primary" />
-                ))}
+              <div className="testimonial-card">
+                <div className="flex mb-4">
+                  {[...Array(testimonial.rating)].map((_, i) => (
+                    <Star key={i} className="h-5 w-5 text-primary fill-primary" />
+                  ))}
+                </div>
+                
+                <p className="italic mb-6">{testimonial.quote}</p>
+                
+                <div className="flex items-center">
+                  <div className="h-12 w-12 rounded-full bg-secondary mr-4 overflow-hidden">
+                    <img src={testimonial.image} alt={testimonial.author} className="h-full w-full object-cover" />
+                  </div>
+                  <div>
+                    <p className="font-medium">{testimonial.author}</p>
+                    <p className="text-sm text-muted-foreground">{testimonial.role}</p>
+                  </div>
+                </div>
               </div>
-              <p className="italic mb-6">{testimonial.quote}</p>
-              <div>
-                <p className="font-medium">{testimonial.author}</p>
-                <p className="text-sm text-muted-foreground">{testimonial.role}</p>
-              </div>
-            </Card>
+            </motion.div>
           ))}
         </div>
       </AnimatedSection>

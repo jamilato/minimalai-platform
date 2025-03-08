@@ -79,6 +79,13 @@
   .premium-shadow {
     @apply shadow-[0_4px_28px_rgba(0,0,0,0.03)];
   }
+  
+  .bg-grid-black {
+    background-size: 40px 40px;
+    background-image: 
+      linear-gradient(to right, rgba(0, 0, 0, 0.05) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(0, 0, 0, 0.05) 1px, transparent 1px);
+  }
 }
 
 @layer components {
@@ -116,5 +123,13 @@
   
   .luxury-divider {
     @apply w-full h-px bg-[#EEEEEE] my-16;
+  }
+  
+  .interactive-demo {
+    @apply relative overflow-hidden rounded-lg border border-[#EEEEEE] bg-white p-6 shadow-[0_10px_40px_rgba(0,0,0,0.03)];
+  }
+  
+  .testimonial-card {
+    @apply bg-white border border-[#EEEEEE] rounded-none p-8 shadow-[0_4px_20px_rgba(0,0,0,0.02)] transition-all duration-300 hover:shadow-[0_10px_30px_rgba(0,0,0,0.05)];
   }
 }
