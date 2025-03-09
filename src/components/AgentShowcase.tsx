@@ -102,6 +102,24 @@ const agents: Agent[] = [
     tagline: "Apprentissage personnalisé",
     description: "Créez des expériences d'apprentissage personnalisées et adaptées à chaque apprenant.",
     icon: <GraduationCap className="h-8 w-8" />
+  },
+  {
+    name: "Thomas",
+    expertise: "CONSTRUCTION",
+    avatarSrc: "/agents/thomas.png",
+    color: "bg-gradient-to-b from-amber-400 to-amber-600",
+    tagline: "Projets sécurisés",
+    description: "Surveillez vos projets de construction et anticipez les problèmes potentiels.",
+    icon: <HardHat className="h-8 w-8" />
+  },
+  {
+    name: "Clara",
+    expertise: "SANTÉ",
+    avatarSrc: "/agents/clara.png",
+    color: "bg-gradient-to-b from-emerald-400 to-emerald-600",
+    tagline: "Soins optimisés",
+    description: "Assistez les professionnels de santé dans leur diagnostic et la gestion des patients.",
+    icon: <Stethoscope className="h-8 w-8" />
   }
 ];
 
