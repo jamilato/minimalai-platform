@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { ArrowRight } from 'lucide-react';
 import { motion } from 'framer-motion';
@@ -124,9 +123,6 @@ const agents: Agent[] = [
 ];
 
 const AgentShowcase: React.FC = () => {
-  // Only show first 4 agents in 2x2 grid
-  const displayedAgents = agents.slice(0, 4);
-
   return (
     <div className="relative w-full py-16">
       <div className="flex justify-between items-center mb-12">
@@ -139,8 +135,8 @@ const AgentShowcase: React.FC = () => {
         </div>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-        {displayedAgents.map((agent) => (
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+        {agents.map((agent) => (
           <motion.div
             key={agent.name}
             className="flex-shrink-0"
@@ -199,7 +195,7 @@ const AgentShowcase: React.FC = () => {
           variant="outline"
           className="border-black text-black hover:bg-black hover:text-white px-8 py-6 text-lg rounded-none"
         >
-          Voir tous nos agents <ArrowRight className="ml-2 h-5 w-5" />
+          Explorer toutes nos solutions <ArrowRight className="ml-2 h-5 w-5" />
         </Button>
       </div>
     </div>
