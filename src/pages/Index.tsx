@@ -1,10 +1,9 @@
+
 import { useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { 
-  Bot, Zap, Shield, ArrowRight, MessageCircle, Star, Check,
-  Phone, FileSpreadsheet, Euro, TrendingUp, Landmark, FileText, 
-  Building, GraduationCap, HardHat, Stethoscope
+  Bot, Zap, Shield, ArrowRight, MessageCircle, Star, Check
 } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { Section, AnimatedSection, Feature, HeroHeading, Badge, Card } from '@/components/ui-components';
@@ -68,60 +67,6 @@ const Index = () => {
       description: "Transformez vos données en insights actionnables grâce à notre IA d'analyse performante.",
       features: ["Visualisation interactive", "Détection de tendances", "Rapports automatisés"],
     },
-  ];
-  
-  // Specialized AI agents data
-  const specializedAgents = [
-    {
-      icon: <Phone className="h-8 w-8" />,
-      title: "Téléphonie",
-      description: "Automatisez votre support client avec un assistant téléphonique intelligent et personnalisable."
-    },
-    {
-      icon: <FileSpreadsheet className="h-8 w-8" />,
-      title: "Comptabilité",
-      description: "Simplifiez votre gestion comptable avec un assistant qui automatise les tâches répétitives."
-    },
-    {
-      icon: <TrendingUp className="h-8 w-8" />,
-      title: "Marketing",
-      description: "Optimisez vos campagnes marketing avec des analyses prédictives et des recommandations ciblées."
-    },
-    {
-      icon: <Landmark className="h-8 w-8" />,
-      title: "Juridique",
-      description: "Obtenez une assistance juridique pour l'analyse de documents et la rédaction de contrats."
-    },
-    {
-      icon: <Euro className="h-8 w-8" />,
-      title: "Finance",
-      description: "Analysez vos données financières et obtenez des prévisions précises pour optimiser vos investissements."
-    },
-    {
-      icon: <FileText className="h-8 w-8" />,
-      title: "Administration",
-      description: "Automatisez vos tâches administratives et gagnez un temps précieux au quotidien."
-    },
-    {
-      icon: <Building className="h-8 w-8" />,
-      title: "Immobilier",
-      description: "Optimisez la gestion de vos biens immobiliers et améliorez votre relation client."
-    },
-    {
-      icon: <GraduationCap className="h-8 w-8" />,
-      title: "Éducation",
-      description: "Créez des expériences d'apprentissage personnalisées et adaptées à chaque apprenant."
-    },
-    {
-      icon: <HardHat className="h-8 w-8" />,
-      title: "Construction",
-      description: "Surveillez vos projets de construction et anticipez les problèmes potentiels."
-    },
-    {
-      icon: <Stethoscope className="h-8 w-8" />,
-      title: "Santé",
-      description: "Assistez les professionnels de santé dans leur diagnostic et la gestion des patients."
-    }
   ];
   
   return (
@@ -199,45 +144,6 @@ const Index = () => {
       {/* Featured Agents Showcase */}
       <AnimatedSection className="bg-white" id="featured-agents">
         <AgentShowcase />
-      </AnimatedSection>
-      
-      {/* Specialized AI Agents Section */}
-      <AnimatedSection className="bg-white" id="specialized-agents">
-        <div className="text-center mb-16">
-          <Badge className="mb-4">Agents Spécialisés</Badge>
-          <h2 className="section-heading">Des solutions IA pour chaque domaine</h2>
-          <p className="section-subheading">
-            Découvrez nos agents IA spécialisés par secteur d'activité, conçus pour répondre 
-            aux défis spécifiques de votre industrie avec précision et efficacité.
-          </p>
-        </div>
-        
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6 md:gap-8">
-          {specializedAgents.map((agent, index) => (
-            <motion.div
-              key={index}
-              whileHover={{ y: -5 }}
-              transition={{ duration: 0.3 }}
-            >
-              <Card className="h-full flex flex-col items-center text-center p-6">
-                <div className="mb-4 p-3 bg-secondary rounded-full text-primary">
-                  {agent.icon}
-                </div>
-                <h3 className="text-lg font-semibold mb-2">{agent.title}</h3>
-                <p className="text-sm text-muted-foreground">{agent.description}</p>
-              </Card>
-            </motion.div>
-          ))}
-        </div>
-        
-        <div className="mt-12 text-center">
-          <Link 
-            to="/assistants" 
-            className="hero-button bg-primary text-primary-foreground"
-          >
-            Explorer tous nos agents
-          </Link>
-        </div>
       </AnimatedSection>
       
       {/* Features Section */}
