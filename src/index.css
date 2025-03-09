@@ -3,6 +3,8 @@
 @tailwind components;
 @tailwind utilities;
 
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+
 @layer base {
   :root {
     --background: 0 0% 100%;
@@ -33,7 +35,7 @@
     --input: 0 0% 92%;
     --ring: 0 0% 3.9%;
 
-    --radius: 0.25rem;
+    --radius: 0.75rem;
   }
 
   * {
@@ -91,11 +93,31 @@
     font-family: 'Playfair Display', serif;
     font-style: italic;
   }
+  
+  .animate-float {
+    animation: float 6s ease-in-out infinite;
+  }
+  
+  .text-gradient {
+    @apply bg-gradient-to-br from-foreground to-muted-foreground bg-clip-text text-transparent;
+  }
+  
+  .card-hover {
+    @apply transition-all duration-300 transform hover:-translate-y-2 hover:shadow-lg;
+  }
+  
+  .scale-hover {
+    @apply transition-transform duration-300 hover:scale-105;
+  }
+  
+  .card-gradient {
+    @apply bg-gradient-to-br from-white to-secondary/80 backdrop-blur-sm;
+  }
 }
 
 @layer components {
   .hero-button {
-    @apply px-6 py-3 rounded-none border border-transparent transition-all duration-300 ease-in-out transform hover:scale-105 focus:outline-none focus:ring-0 font-medium;
+    @apply px-6 py-3 rounded-md border border-transparent transition-all duration-300 ease-in-out transform hover:scale-105 focus:outline-none focus:ring-0 font-medium;
   }
   
   .section-heading {
@@ -115,11 +137,11 @@
   }
   
   .minimal-card {
-    @apply bg-white border border-[#EEEEEE] shadow-[0_4px_28px_rgba(0,0,0,0.03)] rounded-none p-6;
+    @apply bg-white border border-[#EEEEEE] shadow-[0_4px_28px_rgba(0,0,0,0.03)] rounded-lg p-6 transition-all duration-300 hover:shadow-[0_10px_40px_rgba(0,0,0,0.08)];
   }
   
   .minimal-input {
-    @apply border-[#EEEEEE] rounded-none focus:ring-0 focus:border-black transition-colors;
+    @apply border-[#EEEEEE] rounded-md focus:ring-0 focus:border-black transition-colors;
   }
   
   .premium-grid {
@@ -135,7 +157,7 @@
   }
   
   .testimonial-card {
-    @apply bg-white border border-[#EEEEEE] rounded-none p-8 shadow-[0_4px_20px_rgba(0,0,0,0.02)] transition-all duration-300 hover:shadow-[0_10px_30px_rgba(0,0,0,0.05)];
+    @apply bg-white border border-[#EEEEEE] rounded-lg p-8 shadow-[0_4px_20px_rgba(0,0,0,0.02)] transition-all duration-300 hover:shadow-[0_10px_30px_rgba(0,0,0,0.05)];
   }
 
   .agent-card {
@@ -150,3 +172,35 @@
     @apply text-white font-medium tracking-wide text-center absolute bottom-4 left-0 right-0 px-4 py-2 bg-black/60;
   }
 }
+
+@keyframes float {
+  0%, 100% { 
+    transform: translateY(0);
+  }
+  50% { 
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateX(-20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
